@@ -43,15 +43,13 @@
         
         <div class="hidden md:flex gap-6 text-sm font-semibold text-gray-600 dark:text-gray-400">
             <button onclick="navigate('home')" id="nav-btn-home" class="nav-link text-adguard transition-colors" data-i18n="navHome">Home</button>
-            <button onclick="navigate('products')" id="nav-btn-products" class="nav-link hover:text-adguard transition-colors" data-i18n="navProducts">Products</button>
+            <button onclick="navigate('platforms')" id="nav-btn-platforms" class="nav-link hover:text-adguard transition-colors" data-i18n="navPlatforms">Supported Platforms</button>
             <button onclick="navigate('blogs')" id="nav-btn-blogs" class="nav-link hover:text-adguard transition-colors" data-i18n="navBlog">Blog</button>
             <button onclick="navigate('support')" id="nav-btn-support" class="nav-link hover:text-adguard transition-colors" data-i18n="navSupport">Support</button>
             <button onclick="navigate('partners')" id="nav-btn-partners" class="nav-link hover:text-adguard transition-colors" data-i18n="navPartners">Partners</button>
         </div>
         
         <div class="flex items-center gap-3 md:gap-4">
-            <a href="#" class="text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-adguard" data-i18n="navLogin">Log in</a>
-            
             <!-- Dark / Light Mode Toggle -->
             <button onclick="toggleTheme()" aria-label="Toggle Theme" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none rounded-full text-sm p-2.5 transition-colors">
                 <i class="fa-solid fa-moon hidden dark:block"></i>
@@ -156,27 +154,84 @@
             </div>
         </section>
 
-        <!-- 2. PRODUCTS VIEW -->
-        <section id="view-products" class="page-view hidden max-w-7xl mx-auto px-6 md:px-8 py-16">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-8" data-i18n="prodTitle">Omicron Android Editions</h1>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                    <i class="fa-solid fa-cloud-arrow-down text-4xl text-green-500 mb-4"></i>
-                    <h2 class="text-2xl font-bold mb-2 dark:text-white" data-i18n="prodWin">Omicron Video Downloader Pro</h2>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-i18n="prodWinDesc">All-in-one APK for Android to grab videos from 100+ social media apps and websites in crystal-clear quality.</p>
-                    <a href="https://whatsapp.com/channel/0029Vb7MArw0LKZMpjjqOk2P" target="_blank" rel="noopener noreferrer" class="text-adguard font-semibold hover:underline" data-i18n="learnMore">Get it now &rarr;</a>
+        <!-- 2. SUPPORTED PLATFORMS VIEW -->
+        <section id="view-platforms" class="page-view hidden max-w-7xl mx-auto px-6 md:px-8 py-16">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4" data-i18n="platformsTitle">Supported Platforms</h1>
+                <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg" data-i18n="platformsSub">Download videos, reels, stories, and audio from all your favorite social networks and websites with Omicron for Android.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- YouTube -->
+                <div class="p-6 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-red-50 dark:bg-red-950/40 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-youtube text-3xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">YouTube & Shorts</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="platYtDesc">Download videos in 1080p, 2K, 4K, extract MP3 audio directly, and save entire playlists with a single tap.</p>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-adguard bg-blue-50 dark:bg-blue-950/50 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-circle-check text-xs"></i> 4K UHD & MP3
+                    </span>
                 </div>
-                <div class="p-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                    <i class="fa-solid fa-music text-4xl text-blue-500 mb-4"></i>
-                    <h2 class="text-2xl font-bold mb-2 dark:text-white" data-i18n="prodMac">Omicron Audio Extractor</h2>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-i18n="prodMacDesc">Directly extract 320kbps MP3 and high-fidelity sound tracks from trending music and video reels.</p>
-                    <a href="https://whatsapp.com/channel/0029Vb7MArw0LKZMpjjqOk2P" target="_blank" rel="noopener noreferrer" class="text-adguard font-semibold hover:underline" data-i18n="learnMore">Get it now &rarr;</a>
+
+                <!-- TikTok -->
+                <div class="p-6 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-gray-700/60 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-tiktok text-3xl text-gray-900 dark:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">TikTok</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="platTtDesc">Download watermark-free HD videos, trending background music, and original user sounds with blazing speed.</p>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-adguard bg-blue-50 dark:bg-blue-950/50 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-circle-check text-xs"></i> No Watermark
+                    </span>
                 </div>
-                <div class="p-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                    <i class="fa-solid fa-layer-group text-4xl text-purple-500 mb-4"></i>
-                    <h2 class="text-2xl font-bold mb-2 dark:text-white" data-i18n="prodAnd">Omicron Batch Downloader</h2>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-i18n="prodAndDesc">Queue multiple playlist links or channels and download complete video albums with one tap.</p>
-                    <a href="https://whatsapp.com/channel/0029Vb7MArw0LKZMpjjqOk2P" target="_blank" rel="noopener noreferrer" class="text-adguard font-semibold hover:underline" data-i18n="learnMore">Get it now &rarr;</a>
+
+                <!-- Instagram -->
+                <div class="p-6 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-pink-50 dark:bg-pink-950/40 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-instagram text-3xl text-pink-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Instagram</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="platIgDesc">Save Reels, stories, IGTV clips, and carousel video posts directly to your Android photo gallery.</p>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-adguard bg-blue-50 dark:bg-blue-950/50 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-circle-check text-xs"></i> Reels & Stories
+                    </span>
+                </div>
+
+                <!-- Facebook -->
+                <div class="p-6 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-950/40 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-facebook text-3xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Facebook</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="platFbDesc">Fast download support for public Facebook Watch videos, reels, community shared clips, and live streams.</p>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-adguard bg-blue-50 dark:bg-blue-950/50 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-circle-check text-xs"></i> Watch & Reels HD
+                    </span>
+                </div>
+
+                <!-- X / Twitter -->
+                <div class="p-6 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-gray-700/60 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-x-twitter text-3xl text-gray-900 dark:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">X (Twitter)</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="platXDesc">Save embedded tweet videos, threads with media, and high-framerate GIFs in their original broadcast bitrate.</p>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-adguard bg-blue-50 dark:bg-blue-950/50 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-circle-check text-xs"></i> High Bitrate
+                    </span>
+                </div>
+
+                <!-- 50+ Other Platforms -->
+                <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-800/80 border border-blue-100 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-adguard/10 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-globe text-3xl text-adguard"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">50+ More Sites</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="platMoreDesc">Comprehensive engine supporting Pinterest, Reddit, Vimeo, Threads, Dailymotion, Soundcloud, and more.</p>
+                    <a href="https://whatsapp.com/channel/0029Vb7MArw0LKZMpjjqOk2P" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sm font-bold text-adguard hover:underline">
+                        <span data-i18n="requestPlatform">Request a site</span> &rarr;
+                    </a>
                 </div>
             </div>
         </section>
@@ -280,7 +335,7 @@
         const translations = {
             en: {
                 navHome: "Home",
-                navProducts: "Products",
+                navPlatforms: "Supported Platforms",
                 navBlog: "Blog",
                 navSupport: "Support",
                 navPartners: "Partners",
@@ -302,13 +357,15 @@
                 stat3: "Download speed boosted",
                 statusActive: "Turbo Download Active",
                 statusDisabled: "Turbo Download Paused",
-                prodTitle: "Omicron Android Editions",
-                prodWin: "Omicron Video Downloader Pro",
-                prodWinDesc: "All-in-one APK for Android to grab videos from 100+ social media apps and websites in crystal-clear quality.",
-                prodMac: "Omicron Audio Extractor",
-                prodMacDesc: "Directly extract 320kbps MP3 and high-fidelity sound tracks from trending music and video reels.",
-                prodAnd: "Omicron Batch Downloader",
-                prodAndDesc: "Queue multiple playlist links or channels and download complete video albums with one tap.",
+                platformsTitle: "Supported Platforms",
+                platformsSub: "Download videos, reels, stories, and audio from all your favorite social networks and websites with Omicron for Android.",
+                platYtDesc: "Download videos in 1080p, 2K, 4K, extract MP3 audio directly, and save entire playlists with a single tap.",
+                platTtDesc: "Download watermark-free HD videos, trending background music, and original user sounds with blazing speed.",
+                platIgDesc: "Save Reels, stories, IGTV clips, and carousel video posts directly to your Android photo gallery.",
+                platFbDesc: "Fast download support for public Facebook Watch videos, reels, community shared clips, and live streams.",
+                platXDesc: "Save embedded tweet videos, threads with media, and high-framerate GIFs in their original broadcast bitrate.",
+                platMoreDesc: "Comprehensive engine supporting Pinterest, Reddit, Vimeo, Threads, Dailymotion, Soundcloud, and more.",
+                requestPlatform: "Request a site",
                 learnMore: "Get it now &rarr;",
                 blogTitle: "Latest Android & Video Tips",
                 tagPrivacy: "Android Tips",
@@ -340,7 +397,7 @@
             },
             fr: {
                 navHome: "Accueil",
-                navProducts: "Produits",
+                navPlatforms: "Plateformes supportées",
                 navBlog: "Blog",
                 navSupport: "Support",
                 navPartners: "Partenaires",
@@ -362,13 +419,15 @@
                 stat3: "Vitesse décuplée",
                 statusActive: "Téléchargement Turbo actif",
                 statusDisabled: "Téléchargement Turbo en pause",
-                prodTitle: "Éditions Omicron Android",
-                prodWin: "Omicron Video Downloader Pro",
-                prodWinDesc: "APK tout-en-un pour Android pour récupérer des vidéos de plus de 100 applications et sites sociaux en haute qualité.",
-                prodMac: "Extracteur Audio Omicron",
-                prodMacDesc: "Extrayez directement des pistes MP3 320kbps et un son haute fidélité à partir des tendances vidéo.",
-                prodAnd: "Téléchargeur par lot Omicron",
-                prodAndDesc: "Mettez en file d'attente des playlists et téléchargez des albums vidéo complets en un clic.",
+                platformsTitle: "Plateformes supportées",
+                platformsSub: "Téléchargez des vidéos, des reels, des stories et de l'audio depuis vos réseaux sociaux préférés avec Omicron pour Android.",
+                platYtDesc: "Téléchargez en 1080p, 2K, 4K, extrayez l'audio MP3 directement et enregistrez des listes de lecture complètes.",
+                platTtDesc: "Téléchargez des vidéos HD sans filigrane, des musiques tendance et des sons originaux à grande vitesse.",
+                platIgDesc: "Enregistrez des Reels, des stories, des clips IGTV et des publications directement dans votre galerie Android.",
+                platFbDesc: "Téléchargement rapide pour les vidéos Facebook Watch publiques, les reels et les diffusions en direct.",
+                platXDesc: "Enregistrez des vidéos de tweets, des threads multimédias et des GIFs haute résolution dans leur débit d'origine.",
+                platMoreDesc: "Moteur complet prenant en charge Pinterest, Reddit, Vimeo, Threads, Dailymotion, Soundcloud et plus encore.",
+                requestPlatform: "Demander un site",
                 learnMore: "Obtenir &rarr;",
                 blogTitle: "Astuces Android & Vidéo",
                 tagPrivacy: "Astuces Android",
@@ -400,7 +459,7 @@
             },
             ar: {
                 navHome: "الرئيسية",
-                navProducts: "المنتجات",
+                navPlatforms: "المنصات المدعومة",
                 navBlog: "المدونة",
                 navSupport: "الدعم",
                 navPartners: "الشركاء",
@@ -422,13 +481,15 @@
                 stat3: "مضاعفة سرعة التحميل",
                 statusActive: "التحميل فائق السرعة نشط",
                 statusDisabled: "التحميل فائق السرعة متوقف",
-                prodTitle: "إصدارات Omicron لنظام أندرويد",
-                prodWin: "Omicron محمل الفيديو الاحترافي",
-                prodWinDesc: "تطبيق أندرويد متكامل لتحميل الفيديوهات من أكثر من 100 موقع وتطبيق تواصل بدقة فائقة.",
-                prodMac: "Omicron مستخرج الصوت",
-                prodMacDesc: "استخرج مقاطع الصوت وملفات MP3 بجودة 320kbps العالية من مقاطع الفيديو والريلز مباشرة.",
-                prodAnd: "Omicron للتحميل المجمع",
-                prodAndDesc: "قم بجدولة قوائم التشغيل والقنوات وحمّل ألبومات الفيديوهات بلمسة واحدة.",
+                platformsTitle: "المنصات المدعومة",
+                platformsSub: "قم بتحميل الفيديوهات، والريلز، والستوري، والمقاطع الصوتية من جميع منصات التواصل الاجتماعي ومواقع الويب مع Omicron لأندرويد.",
+                platYtDesc: "تحميل بجودة 1080p و 2K و 4K واستخراج صوت MP3 مباشرة وحفظ قوائم التشغيل كاملة بلمسة واحدة.",
+                platTtDesc: "تحميل فيديوهات بدقة عالية بدون علامة مائية والموسيقى الرائجة والأصوات الأصلية بسرعة فائقة.",
+                platIgDesc: "احفظ الريلز، والقصص (Stories)، ومقاطع IGTV، ومجموعات الصور والفيديو مباشرة إلى معرض صور أندرويد.",
+                platFbDesc: "دعم سريع لتحميل مقاطع Facebook Watch العامة والريلز ومقاطع الفيديو المشاركة والبث المباشر.",
+                platXDesc: "حفظ الفيديوهات المضمنة في التغريدات والثريدات ومقاطع الـ GIF العالية السرعة بمعدل البت الأصلي.",
+                platMoreDesc: "محرك تحميل متكامل يدعم بينترست، وريديت، وفيميو، وثريدز، وديلي موشن، وساوند كلاود، والمزيد.",
+                requestPlatform: "طلب إضافة موقع",
                 learnMore: "احصل عليه الآن &larr;",
                 blogTitle: "أحدث نصائح أندرويد والتحميل",
                 tagPrivacy: "نصائح أندرويد",
@@ -462,7 +523,7 @@
 
         let currentLang = 'en';
         let isProtectionActive = true;
-        const validPages = ['home', 'products', 'blogs', 'support', 'partners'];
+        const validPages = ['home', 'platforms', 'blogs', 'support', 'partners'];
 
         function navigate(pageId) {
             if (!validPages.includes(pageId)) pageId = 'home';
