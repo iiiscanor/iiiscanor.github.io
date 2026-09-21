@@ -78,10 +78,10 @@
             background-color: rgba(239, 68, 68, 0.32) !important;
         }
 
-        /* Pulsing Red Glow for Download Button */
+        /* Pulsing Red Glow for Download Button - Corrected standard CSS syntax */
         @keyframes dangerGlow {
-            0% { boxShadow: 0 0 6px 0px rgba(239, 68, 68, 0.4); }
-            100% { boxShadow: 0 0 28px 12px rgba(220, 38, 38, 0.85); }
+            0% { box-shadow: 0 0 6px 0px rgba(239, 68, 68, 0.4); }
+            100% { box-shadow: 0 0 28px 12px rgba(220, 38, 38, 0.85); }
         }
         body.danger-mode .animate-fire-glow {
             animation: dangerGlow 1.2s infinite alternate !important;
@@ -102,30 +102,30 @@
     <!-- Unified Navigation Bar -->
     <nav class="flex items-center justify-between px-6 md:px-8 py-4 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300 sticky top-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-40">
         <div class="flex items-center gap-2">
-            <a href="#home" onclick="navigate('home')" class="flex items-center gap-2">
+            <a href="#home" onclick="navigate('home')" class="flex items-center gap-2" aria-label="Omicron Home">
                 <i class="fa-solid fa-shield-halved text-adguard text-3xl"></i>
                 <span class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Omicron</span>
             </a>
         </div>
         <div class="hidden md:flex gap-6 text-sm font-semibold text-gray-600 dark:text-gray-400">
-            <button onclick="navigate('home')" id="nav-btn-home" class="nav-link text-adguard transition-colors" data-i18n="navHome">Home</button>
-            <button onclick="navigate('platforms')" id="nav-btn-platforms" class="nav-link hover:text-adguard transition-colors" data-i18n="navPlatforms">Supported Platforms</button>
-            <button onclick="navigate('support')" id="nav-btn-support" class="nav-link hover:text-adguard transition-colors" data-i18n="navSupport">Support</button>
-            <button onclick="navigate('partners')" id="nav-btn-partners" class="nav-link hover:text-adguard transition-colors" data-i18n="navPartners">Partners</button>
+            <button type="button" onclick="navigate('home')" id="nav-btn-home" class="nav-link text-adguard transition-colors" data-i18n="navHome">Home</button>
+            <button type="button" onclick="navigate('platforms')" id="nav-btn-platforms" class="nav-link hover:text-adguard transition-colors" data-i18n="navPlatforms">Supported Platforms</button>
+            <button type="button" onclick="navigate('support')" id="nav-btn-support" class="nav-link hover:text-adguard transition-colors" data-i18n="navSupport">Support</button>
+            <button type="button" onclick="navigate('partners')" id="nav-btn-partners" class="nav-link hover:text-adguard transition-colors" data-i18n="navPartners">Partners</button>
         </div>
         <div class="flex items-center gap-4">
             <!-- Theme Toggle -->
-            <button onclick="toggleTheme()" aria-label="Toggle Theme" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none rounded-full text-sm p-2.5 transition-colors">
+            <button type="button" onclick="toggleTheme()" aria-label="Toggle Theme" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none rounded-full text-sm p-2.5 transition-colors">
                 <i class="fa-solid fa-moon hidden dark:block"></i>
                 <i class="fa-solid fa-sun dark:hidden block"></i>
             </button>
 
             <!-- Language Dropdown -->
             <div class="relative group z-50">
-                <button class="bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-semibold py-2 px-4 rounded-full transition-colors flex items-center gap-2">
+                <button type="button" aria-haspopup="true" aria-expanded="false" class="bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-semibold py-2 px-4 rounded-full transition-colors flex items-center gap-2">
                     <span id="currentLangText">EN </span> <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
                 </button>
-                <div class="absolute right-0 mt-1 w-32 bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-100 dark:border-gray-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div id="langDropdownMenu" class="absolute right-0 mt-1 w-32 bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-100 dark:border-gray-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                     <a href="javascript:void(0)" onclick="setLanguage('en')" class="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-adguard dark:hover:text-adguard rounded-t-xl transition-colors">English (EN)</a>
                     <a href="javascript:void(0)" onclick="setLanguage('fr')" class="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-adguard dark:hover:text-adguard transition-colors">Français (FR)</a>
                     <a href="javascript:void(0)" onclick="setLanguage('ar')" class="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-adguard dark:hover:text-adguard rounded-b-xl transition-colors">العربية (AR)</a>
@@ -190,7 +190,7 @@
                             <i id="cardBrandIcon" class="fa-solid fa-shield-halved text-adguard text-xl transition-colors"></i>
                             <h3 id="cardBrandTitle" class="font-bold text-xl dark:text-white transition-colors">Omicron</h3>
                         </div>
-                        <button dir="ltr" onclick="toggleProtection()" id="toggleTrack" aria-label="Toggle Comparison" class="w-12 h-6 bg-adguard rounded-full relative cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none">
+                        <button type="button" dir="ltr" onclick="toggleProtection()" id="toggleTrack" aria-label="Toggle Comparison" class="w-12 h-6 bg-adguard rounded-full relative cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none">
                             <div id="toggleCircle" class="w-4 h-4 bg-white rounded-full absolute left-1 top-1 shadow-sm transition-transform duration-300 ease-in-out translate-x-6"></div>
                         </button>
                     </div>
@@ -306,7 +306,7 @@
             <div class="max-w-2xl mx-auto mb-12">
                 <div class="relative">
                     <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" placeholder="Search tutorials, supported sites, FAQs..." class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full py-4 pl-12 pr-4 text-base md:text-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-adguard focus:ring-1 focus:ring-adguard transition-all" data-i18n="supSearch">
+                    <input type="text" aria-label="Search tutorials, supported sites, FAQs" placeholder="Search tutorials, supported sites, FAQs..." class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full py-4 pl-12 pr-4 text-base md:text-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-adguard focus:ring-1 focus:ring-adguard transition-all" data-i18n="supSearch">
                 </div>
             </div>
 
@@ -551,7 +551,7 @@
         let isProtectionActive = true;
         const validPages = ['home', 'platforms', 'support', 'partners'];
 
-        function navigate(pageId) {
+        function navigate(pageId, shouldUpdateHash = true) {
             if (!validPages.includes(pageId)) pageId = 'home';
             
             document.querySelectorAll('.page-view').forEach(view => {
@@ -571,36 +571,43 @@
                 activeNavBtn.classList.remove('hover:text-adguard');
             }
 
-            window.location.hash = pageId;
+            if (shouldUpdateHash && window.location.hash !== `#${pageId}`) {
+                window.location.hash = pageId;
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const hash = window.location.hash.replace('#', '');
-            navigate(hash || 'home');
-            updateComparisonCard();
-        });
-
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
+        // Safe Theme Initializer with try/catch to protect in sandboxed environments
+        try {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        } catch (e) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            }
         }
 
         function toggleTheme() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
+            try {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.theme = 'light';
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.theme = 'dark';
+                }
+            } catch (e) {
+                document.documentElement.classList.toggle('dark');
             }
         }
 
         function setLanguage(lang) {
             currentLang = lang;
             const htmlTag = document.getElementById('htmlTag');
-            const dropdownMenu = document.querySelector('.group > div');
+            const dropdownMenu = document.getElementById('langDropdownMenu');
             const i18nList = document.querySelectorAll('[data-i18n]');
             const currentLangText = document.getElementById('currentLangText');
 
@@ -670,7 +677,7 @@
             if (dangerBannerText) dangerBannerText.innerText = t.dangerBanner;
 
             if (isProtectionActive) {
-                // Enabled: Safe Omicron state
+                // Safe Omicron State
                 document.body.classList.remove('danger-mode');
                 if (dangerOverlay) {
                     dangerOverlay.classList.remove('opacity-100');
@@ -708,7 +715,7 @@
                     statusText.className = 'font-semibold text-gray-700 dark:text-gray-300 transition-colors duration-300';
                 }
             } else {
-                // Disabled: Insecure "Other Apps" state
+                // Insecure "Other Apps" State
                 document.body.classList.add('danger-mode');
                 if (dangerOverlay) {
                     dangerOverlay.classList.remove('opacity-0');
@@ -747,6 +754,20 @@
                 }
             }
         }
+
+        // Synchronize browser history and hash navigation
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && validPages.includes(hash)) {
+                navigate(hash, false);
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            navigate(hash || 'home', false);
+            updateComparisonCard();
+        });
     </script>
 </body>
 </html>
