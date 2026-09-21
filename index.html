@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -30,27 +30,91 @@
             }
         }
     </script>
+    <style>
+        body, nav, section, div, span, button, a {
+            transition: background-color 0.4s ease, border-color 0.4s ease, color 0.3s ease, box-shadow 0.4s ease;
+        }
+
+        /* Danger Mode Global Background */
+        body.danger-mode {
+            background-color: #fef2f2 !important;
+        }
+        html.dark body.danger-mode {
+            background-color: #180606 !important;
+        }
+
+        /* Brand Colors in Danger State */
+        body.danger-mode .text-adguard {
+            color: #ef4444 !important;
+        }
+        body.danger-mode .bg-adguard {
+            background-color: #dc2626 !important;
+        }
+        body.danger-mode .hover\:bg-adguardDark:hover {
+            background-color: #b91c1c !important;
+        }
+
+        /* Nav & Soft Background Tints in Danger State */
+        body.danger-mode nav {
+            background-color: rgba(254, 242, 242, 0.94) !important;
+            border-color: rgba(239, 68, 68, 0.25) !important;
+        }
+        html.dark body.danger-mode nav {
+            background-color: rgba(24, 6, 6, 0.94) !important;
+            border-color: rgba(185, 28, 28, 0.35) !important;
+        }
+        body.danger-mode .bg-blue-50 {
+            background-color: rgba(254, 226, 226, 0.85) !important;
+            border-color: rgba(239, 68, 68, 0.25) !important;
+        }
+        html.dark body.danger-mode .bg-blue-50,
+        html.dark body.danger-mode .dark\:bg-gray-800\/50 {
+            background-color: rgba(69, 10, 10, 0.45) !important;
+            border-color: rgba(185, 28, 28, 0.35) !important;
+        }
+
+        /* Ambient Glow in Danger State */
+        body.danger-mode #heroAmbientGlow {
+            background-color: rgba(239, 68, 68, 0.32) !important;
+        }
+
+        /* Pulsing Red Glow for Download Button */
+        @keyframes dangerGlow {
+            0% { boxShadow: 0 0 6px 0px rgba(239, 68, 68, 0.4); }
+            100% { boxShadow: 0 0 28px 12px rgba(220, 38, 38, 0.85); }
+        }
+        body.danger-mode .animate-fire-glow {
+            animation: dangerGlow 1.2s infinite alternate !important;
+        }
+    </style>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans antialiased transition-colors duration-300 min-h-screen flex flex-col justify-between">
 
+    <!-- Fullscreen Red Perimeter Vignette Overlay -->
+    <div id="dangerOverlay" class="fixed inset-0 pointer-events-none z-40 transition-opacity duration-700 opacity-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(239,68,68,0.25)_100%)] border-[6px] border-red-500/25"></div>
+
+    <!-- Emergency Warning Top Banner -->
+    <div id="dangerBanner" class="hidden bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white text-xs md:text-sm font-bold py-2.5 px-4 text-center transition-all duration-300 shadow-md flex items-center justify-center gap-2 sticky top-0 z-50">
+        <i class="fa-solid fa-triangle-exclamation animate-bounce"></i>
+        <span id="dangerBannerText" data-i18n="dangerBanner">⚠️ Security Warning: Unofficial apps expose your device to malware, background spyware, and heavy throttling!</span>
+    </div>
+
     <!-- Unified Navigation Bar -->
-    <nav class="flex items-center justify-between px-6 md:px-8 py-4 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300 sticky top-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50">
+    <nav class="flex items-center justify-between px-6 md:px-8 py-4 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300 sticky top-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-40">
         <div class="flex items-center gap-2">
-            <a href="#home" onclick="navigate('home')" class="flex items-center gap-2 cursor-pointer">
+            <a href="#home" onclick="navigate('home')" class="flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-adguard text-3xl"></i>
                 <span class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Omicron</span>
             </a>
         </div>
-        
         <div class="hidden md:flex gap-6 text-sm font-semibold text-gray-600 dark:text-gray-400">
             <button onclick="navigate('home')" id="nav-btn-home" class="nav-link text-adguard transition-colors" data-i18n="navHome">Home</button>
             <button onclick="navigate('platforms')" id="nav-btn-platforms" class="nav-link hover:text-adguard transition-colors" data-i18n="navPlatforms">Supported Platforms</button>
-            <button onclick="navigate('blogs')" id="nav-btn-blogs" class="nav-link hover:text-adguard transition-colors" data-i18n="navBlog">Blog</button>
             <button onclick="navigate('support')" id="nav-btn-support" class="nav-link hover:text-adguard transition-colors" data-i18n="navSupport">Support</button>
             <button onclick="navigate('partners')" id="nav-btn-partners" class="nav-link hover:text-adguard transition-colors" data-i18n="navPartners">Partners</button>
         </div>
-        
-        <div class="flex items-center gap-3 md:gap-4">
-            <!-- Dark / Light Mode Toggle -->
+        <div class="flex items-center gap-4">
+            <!-- Theme Toggle -->
             <button onclick="toggleTheme()" aria-label="Toggle Theme" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none rounded-full text-sm p-2.5 transition-colors">
                 <i class="fa-solid fa-moon hidden dark:block"></i>
                 <i class="fa-solid fa-sun dark:hidden block"></i>
@@ -58,7 +122,7 @@
 
             <!-- Language Dropdown -->
             <div class="relative group z-50">
-                <button class="bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-semibold py-2 px-3 md:px-4 rounded-full transition-colors flex items-center gap-2">
+                <button class="bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-semibold py-2 px-4 rounded-full transition-colors flex items-center gap-2">
                     <span id="currentLangText">EN </span> <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
                 </button>
                 <div class="absolute right-0 mt-1 w-32 bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-100 dark:border-gray-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
@@ -70,13 +134,13 @@
         </div>
     </nav>
 
-    <!-- App Content Pages / Sections Container -->
+    <!-- Main Views Container -->
     <div id="pages-container" class="flex-1">
 
         <!-- 1. HOME VIEW -->
         <section id="view-home" class="page-view max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-20 flex flex-col md:flex-row items-center gap-12">
-            <div class="flex-1 space-y-8">
-                <div class="inline-flex items-center gap-2 bg-blue-50 dark:bg-gray-800/50 text-adguard px-3 py-1 rounded-full text-sm font-semibold border border-blue-100 dark:border-gray-700">
+            <div class="flex-1 space-y-6 md:space-y-8">
+                <div class="inline-flex items-center gap-2 bg-blue-50 dark:bg-gray-800/50 text-adguard px-3.5 py-1.5 rounded-full text-sm font-semibold border border-blue-100 dark:border-gray-700">
                     <i class="fa-solid fa-star text-yellow-400"></i>
                     <span data-i18n="reviews">11 user reviews - Excellent!</span>
                 </div>
@@ -86,7 +150,7 @@
                     <span class="text-adguard" data-i18n="heading2">Fast, Free & for Android!</span>
                 </h1>
                 
-                <ul class="space-y-4 text-base md:text-lg text-gray-600 dark:text-gray-400">
+                <ul class="space-y-3.5 text-base md:text-lg text-gray-600 dark:text-gray-400">
                     <li class="flex items-center gap-3">
                         <i class="fa-solid fa-check text-adguard"></i>
                         <span data-i18n="feat1">Supports YouTube, TikTok, Instagram, Facebook & X</span>
@@ -106,12 +170,10 @@
                 </ul>
 
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <!-- Direct link to GitHub releases with animation -->
                     <a href="https://github.com/hamzabellouch/omicron/releases/" target="_blank" rel="noopener noreferrer" class="bg-adguard hover:bg-adguardDark text-white text-lg font-bold py-4 px-8 rounded-full transition-all transform hover:-translate-y-1 animate-fire-glow inline-flex items-center justify-center gap-2 text-center shadow-lg" data-i18n="btnDownload">
                         <i class="fa-solid fa-download text-xl"></i>
                         <span>Download APK</span>
                     </a>
-                    <!-- Direct link to GitHub repository for installation guide -->
                     <a href="https://github.com/hamzabellouch/omicron" target="_blank" rel="noopener noreferrer" class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border-2 border-gray-200 dark:border-gray-700 text-lg font-bold py-4 px-8 rounded-full transition-all inline-flex items-center justify-center gap-2 text-center" data-i18n="btnInstall">
                         <i class="fa-brands fa-github text-xl"></i>
                         <span>How to install</span>
@@ -121,34 +183,34 @@
             </div>
 
             <div class="flex-1 flex justify-center relative w-full">
-                <div class="absolute inset-0 bg-blue-100 dark:bg-adguard/20 rounded-full blur-3xl opacity-50 transform -translate-x-10 translate-y-10 transition-colors duration-500"></div>
-                <div class="relative bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-2xl rounded-2xl p-6 md:p-8 w-full max-w-md z-10 transform rotate-1 hover:rotate-0 transition-all duration-500">
+                <div id="heroAmbientGlow" class="absolute inset-0 bg-blue-100 dark:bg-adguard/20 rounded-full blur-3xl opacity-50 transform -translate-x-10 translate-y-10 transition-colors duration-500"></div>
+                <div id="comparisonCardBox" class="relative bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-2xl rounded-2xl p-6 md:p-8 w-full max-w-md z-10 transform rotate-1 hover:rotate-0 transition-all duration-500">
                     <div class="flex justify-between items-center mb-6 border-b dark:border-gray-700 pb-4">
                         <div class="flex items-center gap-2">
-                            <i class="fa-brands fa-android text-adguard text-lg"></i>
-                            <h3 class="font-bold text-xl dark:text-white" data-i18n="cardTitle">Download Engine</h3>
+                            <i id="cardBrandIcon" class="fa-solid fa-shield-halved text-adguard text-xl transition-colors"></i>
+                            <h3 id="cardBrandTitle" class="font-bold text-xl dark:text-white transition-colors">Omicron</h3>
                         </div>
-                        <button dir="ltr" onclick="toggleProtection()" id="toggleTrack" aria-label="Toggle Download Engine" class="w-12 h-6 bg-adguard rounded-full relative cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none">
+                        <button dir="ltr" onclick="toggleProtection()" id="toggleTrack" aria-label="Toggle Comparison" class="w-12 h-6 bg-adguard rounded-full relative cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none">
                             <div id="toggleCircle" class="w-4 h-4 bg-white rounded-full absolute left-1 top-1 shadow-sm transition-transform duration-300 ease-in-out translate-x-6"></div>
                         </button>
                     </div>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600 dark:text-gray-400" data-i18n="stat1">Videos downloaded today</span>
-                            <span class="font-bold text-adguard">1,204</span>
+                    <div class="space-y-4 text-sm md:text-base">
+                        <div class="flex justify-between items-center py-1 border-b border-gray-100 dark:border-gray-700/60">
+                            <span id="stat1Label" class="text-gray-600 dark:text-gray-400 font-medium">Security & Safety</span>
+                            <span id="stat1Val" class="font-bold text-adguard transition-colors">100% Safe (No Viruses)</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600 dark:text-gray-400" data-i18n="stat2">Supported platforms</span>
-                            <span class="font-bold text-adguard">50+ Apps</span>
+                        <div class="flex justify-between items-center py-1 border-b border-gray-100 dark:border-gray-700/60">
+                            <span id="stat2Label" class="text-gray-600 dark:text-gray-400 font-medium">Supported Platforms</span>
+                            <span id="stat2Val" class="font-bold text-adguard transition-colors">+1000 Sites</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600 dark:text-gray-400" data-i18n="stat3">Download speed boosted</span>
-                            <span class="font-bold text-adguard">Up to 10x</span>
+                        <div class="flex justify-between items-center py-1">
+                            <span id="stat3Label" class="text-gray-600 dark:text-gray-400 font-medium">Download Speed</span>
+                            <span id="stat3Val" class="font-bold text-adguard transition-colors">Up to 10x Boosted</span>
                         </div>
                     </div>
-                    <div id="statusContainer" class="mt-8 bg-gray-50 dark:bg-gray-900 p-4 rounded-xl flex items-center justify-center gap-3 transition-colors duration-300">
+                    <div id="statusContainer" class="mt-8 bg-blue-50 dark:bg-gray-900 p-4 rounded-xl flex items-center justify-center gap-3 transition-colors duration-300 border border-blue-100 dark:border-gray-700">
                         <i id="statusIcon" class="fa-solid fa-bolt text-adguard text-2xl transition-colors duration-300"></i>
-                        <span id="statusText" class="font-semibold text-gray-700 dark:text-gray-300 transition-colors duration-300" data-i18n="statusActive">Turbo Download Active</span>
+                        <span id="statusText" class="font-semibold text-gray-700 dark:text-gray-300 transition-colors duration-300">Turbo Download Active</span>
                     </div>
                 </div>
             </div>
@@ -213,7 +275,9 @@
                 <!-- X / Twitter -->
                 <div class="p-6 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group">
                     <div class="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-gray-700/60 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                        <i class="fa-brands fa-x-twitter text-3xl text-gray-900 dark:text-white"></i>
+                        <svg class="w-7 h-7 text-gray-900 dark:text-white fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">X (Twitter)</h3>
                     <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="platXDesc">Save embedded tweet videos, threads with media, and high-framerate GIFs in their original broadcast bitrate.</p>
@@ -222,12 +286,12 @@
                     </span>
                 </div>
 
-                <!-- 50+ Other Platforms -->
+                <!-- +1000 Sites -->
                 <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-800/80 border border-blue-100 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group">
                     <div class="w-14 h-14 rounded-2xl bg-adguard/10 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-globe text-3xl text-adguard"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">50+ More Sites</h3>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">+1000 Sites</h3>
                     <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" data-i18n="platMoreDesc">Comprehensive engine supporting Pinterest, Reddit, Vimeo, Threads, Dailymotion, Soundcloud, and more.</p>
                     <a href="https://whatsapp.com/channel/0029Vb7MArw0LKZMpjjqOk2P" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sm font-bold text-adguard hover:underline">
                         <span data-i18n="requestPlatform">Request a site</span> &rarr;
@@ -236,36 +300,7 @@
             </div>
         </section>
 
-        <!-- 3. BLOGS VIEW -->
-        <section id="view-blogs" class="page-view hidden max-w-7xl mx-auto px-6 md:px-8 py-16">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-8" data-i18n="blogTitle">Latest Android & Video Tips</h1>
-            <div class="space-y-8">
-                <article class="flex flex-col md:flex-row gap-8 items-center bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="w-full md:w-1/3 h-48 bg-gray-200 dark:bg-gray-700 rounded-xl flex items-center justify-center">
-                        <i class="fa-brands fa-youtube text-5xl text-red-500"></i>
-                    </div>
-                    <div class="w-full md:w-2/3">
-                        <span class="text-sm font-semibold text-adguard mb-2 block" data-i18n="tagPrivacy">Android Tips</span>
-                        <h2 class="text-2xl font-bold mb-3 dark:text-white" data-i18n="blog1Title">How to download 4K videos on Android in seconds</h2>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-i18n="blog1Desc">Explore our complete guide on grabbing high-resolution reels and videos from Instagram and TikTok directly to your gallery.</p>
-                        <a href="https://whatsapp.com/channel/0029Vb7MArw0LKZMpjjqOk2P" target="_blank" rel="noopener noreferrer" class="text-adguard font-semibold hover:underline" data-i18n="readArticle">Read article &rarr;</a>
-                    </div>
-                </article>
-                <article class="flex flex-col md:flex-row gap-8 items-center bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
-                    <div class="w-full md:w-1/3 h-48 bg-gray-200 dark:bg-gray-700 rounded-xl flex items-center justify-center">
-                        <i class="fa-solid fa-bolt text-5xl text-yellow-400"></i>
-                    </div>
-                    <div class="w-full md:w-2/3">
-                        <span class="text-sm font-semibold text-adguard mb-2 block" data-i18n="tagUpdates">Updates</span>
-                        <h2 class="text-2xl font-bold mb-3 dark:text-white" data-i18n="blog2Title">Omicron v7.14 for Android is released</h2>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-i18n="blog2Desc">Check out the brand-new multi-thread engine, background downloads, and expanded site support.</p>
-                        <a href="https://whatsapp.com/channel/0029Vb7MArw0LKZMpjjqOk2P" target="_blank" rel="noopener noreferrer" class="text-adguard font-semibold hover:underline" data-i18n="readArticle">Read article &rarr;</a>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- 4. SUPPORT VIEW -->
+        <!-- 3. SUPPORT VIEW -->
         <section id="view-support" class="page-view hidden max-w-7xl mx-auto px-6 md:px-8 py-16 text-center">
             <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-6" data-i18n="supTitle">Need help with Omicron for Android?</h1>
             <div class="max-w-2xl mx-auto mb-12">
@@ -299,7 +334,7 @@
             </div>
         </section>
 
-        <!-- 5. PARTNERS VIEW -->
+        <!-- 4. PARTNERS VIEW -->
         <section id="view-partners" class="page-view hidden max-w-7xl mx-auto px-6 md:px-8 py-16">
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="flex-1 space-y-6">
@@ -327,7 +362,7 @@
 
     <!-- Unified Footer -->
     <footer class="border-t border-gray-100 dark:border-gray-800 py-6 text-center text-xs text-gray-400">
-        &copy; 2026 Omicron Protection Systems. All rights reserved.
+        &copy; 2026 Omicron Systems. All rights reserved.
     </footer>
 
     <!-- Logic: Routing, Translation, Theme & Interactivity -->
@@ -336,10 +371,8 @@
             en: {
                 navHome: "Home",
                 navPlatforms: "Supported Platforms",
-                navBlog: "Blog",
                 navSupport: "Support",
                 navPartners: "Partners",
-                navLogin: "Log in",
                 langBtn: "EN ",
                 reviews: "11 user reviews - Excellent!",
                 heading1: "Download videos from any platform. ",
@@ -351,12 +384,19 @@
                 btnDownload: "Download APK",
                 btnInstall: "How to install",
                 disclaimer: "Compatible with Android 8.0+. Safe, verified, and ad-free.",
-                cardTitle: "Download Engine",
-                stat1: "Videos downloaded today",
-                stat2: "Supported platforms",
-                stat3: "Download speed boosted",
+                cardTitleActive: "Omicron",
+                cardTitleInactive: "Other Apps",
+                stat1Label: "Security & Safety",
+                stat1Active: "100% Safe (No Viruses)",
+                stat1Inactive: "⚠️ Viruses & Malware Detected!",
+                stat2Label: "Supported Platforms",
+                stat2Active: "+1000 Sites",
+                stat2Inactive: "Only 10 Sites",
+                stat3Label: "Download Speed",
+                stat3Active: "Up to 10x Boosted",
+                stat3Inactive: "-1x Slow & Throttled",
                 statusActive: "Turbo Download Active",
-                statusDisabled: "Turbo Download Paused",
+                statusDisabled: "⚠️ High Security Risk: Slow & Dangerous",
                 platformsTitle: "Supported Platforms",
                 platformsSub: "Download videos, reels, stories, and audio from all your favorite social networks and websites with Omicron for Android.",
                 platYtDesc: "Download videos in 1080p, 2K, 4K, extract MP3 audio directly, and save entire playlists with a single tap.",
@@ -366,15 +406,6 @@
                 platXDesc: "Save embedded tweet videos, threads with media, and high-framerate GIFs in their original broadcast bitrate.",
                 platMoreDesc: "Comprehensive engine supporting Pinterest, Reddit, Vimeo, Threads, Dailymotion, Soundcloud, and more.",
                 requestPlatform: "Request a site",
-                learnMore: "Get it now &rarr;",
-                blogTitle: "Latest Android & Video Tips",
-                tagPrivacy: "Android Tips",
-                blog1Title: "How to download 4K videos on Android in seconds",
-                blog1Desc: "Explore our complete guide on grabbing high-resolution reels and videos from Instagram and TikTok directly to your gallery.",
-                readArticle: "Read article &rarr;",
-                tagUpdates: "Updates",
-                blog2Title: "Omicron v7.14 for Android is released",
-                blog2Desc: "Check out the brand-new multi-thread engine, background downloads, and expanded site support.",
                 supTitle: "Need help with Omicron for Android?",
                 supSearch: "Search tutorials, supported sites, FAQs...",
                 kbTitle: "Download Guides",
@@ -393,15 +424,14 @@
                 pFeat1: "High conversion rates",
                 pFeat2: "Generous commission structures",
                 pFeat3: "Dedicated partner support",
-                pFeat4: "Marketing materials provided"
+                pFeat4: "Marketing materials provided",
+                dangerBanner: "⚠️ Security Warning: Unofficial apps expose your device to malware, background spyware, and heavy throttling!"
             },
             fr: {
                 navHome: "Accueil",
                 navPlatforms: "Plateformes supportées",
-                navBlog: "Blog",
                 navSupport: "Support",
                 navPartners: "Partenaires",
-                navLogin: "Connexion",
                 langBtn: "FR ",
                 reviews: "11 avis d'utilisateurs - Excellent !",
                 heading1: "Téléchargez des vidéos depuis toutes les plateformes. ",
@@ -413,12 +443,19 @@
                 btnDownload: "Télécharger l'APK",
                 btnInstall: "Comment installer",
                 disclaimer: "Compatible avec Android 8.0+. Sûr, vérifié et sans publicité.",
-                cardTitle: "Moteur de téléchargement",
-                stat1: "Vidéos téléchargées aujourd'hui",
-                stat2: "Plateformes supportées",
-                stat3: "Vitesse décuplée",
+                cardTitleActive: "Omicron",
+                cardTitleInactive: "Autres Applications",
+                stat1Label: "Sécurité & Fiabilité",
+                stat1Active: "100% Sûr (Sans virus)",
+                stat1Inactive: "⚠️ Virus et malwares détectés !",
+                stat2Label: "Plateformes supportées",
+                stat2Active: "+1000 Sites",
+                stat2Inactive: "Seulement 10 sites",
+                stat3Label: "Vitesse de téléchargement",
+                stat3Active: "Jusqu'à 10x accélérée",
+                stat3Inactive: "-1x Extrêmement lent",
                 statusActive: "Téléchargement Turbo actif",
-                statusDisabled: "Téléchargement Turbo en pause",
+                statusDisabled: "⚠️ Risque de sécurité : Lent et dangereux",
                 platformsTitle: "Plateformes supportées",
                 platformsSub: "Téléchargez des vidéos, des reels, des stories et de l'audio depuis vos réseaux sociaux préférés avec Omicron pour Android.",
                 platYtDesc: "Téléchargez en 1080p, 2K, 4K, extrayez l'audio MP3 directement et enregistrez des listes de lecture complètes.",
@@ -428,15 +465,6 @@
                 platXDesc: "Enregistrez des vidéos de tweets, des threads multimédias et des GIFs haute résolution dans leur débit d'origine.",
                 platMoreDesc: "Moteur complet prenant en charge Pinterest, Reddit, Vimeo, Threads, Dailymotion, Soundcloud et plus encore.",
                 requestPlatform: "Demander un site",
-                learnMore: "Obtenir &rarr;",
-                blogTitle: "Astuces Android & Vidéo",
-                tagPrivacy: "Astuces Android",
-                blog1Title: "Comment télécharger des vidéos 4K sur Android en quelques secondes",
-                blog1Desc: "Découvrez notre guide complet pour enregistrer des réels haute résolution d'Instagram et TikTok directement dans votre galerie.",
-                readArticle: "Lire l'article &rarr;",
-                tagUpdates: "Mises à jour",
-                blog2Title: "Omicron v7.14 pour Android est disponible",
-                blog2Desc: "Découvrez le tout nouveau moteur multi-thread, les téléchargements en arrière-plan et la prise en charge étendue des sites.",
                 supTitle: "Besoin d'aide avec Omicron pour Android ?",
                 supSearch: "Rechercher des guides, sites supportés, FAQ...",
                 kbTitle: "Guides de téléchargement",
@@ -455,15 +483,14 @@
                 pFeat1: "Taux de conversion élevés",
                 pFeat2: "Structures de commissions généreuses",
                 pFeat3: "Support partenaire dédié",
-                pFeat4: "Matériel de marketing fourni"
+                pFeat4: "Matériel de marketing fourni",
+                dangerBanner: "⚠️ Alerte de sécurité : Les applications non sécurisées exposent votre appareil aux malwares et au bridage !"
             },
             ar: {
                 navHome: "الرئيسية",
                 navPlatforms: "المنصات المدعومة",
-                navBlog: "المدونة",
                 navSupport: "الدعم",
                 navPartners: "الشركاء",
-                navLogin: "تسجيل الدخول",
                 langBtn: "AR ",
                 reviews: "11 تقييم مستخدم - ممتاز!",
                 heading1: "حمّل مقاطع الفيديو من أي منصة. ",
@@ -475,12 +502,19 @@
                 btnDownload: "تحميل APK",
                 btnInstall: "طريقة التثبيت",
                 disclaimer: "متوافق مع أندرويد 8.0 فما فوق. آمن، موثوق وخالٍ من الإعلانات.",
-                cardTitle: "محرك التحميل",
-                stat1: "فيديوهات تم تحميلها اليوم",
-                stat2: "المنصات المدعومة",
-                stat3: "مضاعفة سرعة التحميل",
+                cardTitleActive: "أوميكرون (Omicron)",
+                cardTitleInactive: "تطبيقات أخرى (Other Apps)",
+                stat1Label: "الأمان والموثوقية",
+                stat1Active: "آمن 100% (خالٍ من الفيروسات)",
+                stat1Inactive: "⚠️ يحتوي على فيروسات وإعلانات ضارة!",
+                stat2Label: "المنصات المدعومة",
+                stat2Active: "+1000 موقع",
+                stat2Inactive: "10 مواقع فقط",
+                stat3Label: "سرعة التحميل",
+                stat3Active: "مضاعفة حتى 10 أضعاف",
+                stat3Inactive: "-1x بطيء جداً ومحدود",
                 statusActive: "التحميل فائق السرعة نشط",
-                statusDisabled: "التحميل فائق السرعة متوقف",
+                statusDisabled: "⚠️ خطر أمني: بطيء وغير آمن",
                 platformsTitle: "المنصات المدعومة",
                 platformsSub: "قم بتحميل الفيديوهات، والريلز، والستوري، والمقاطع الصوتية من جميع منصات التواصل الاجتماعي ومواقع الويب مع Omicron لأندرويد.",
                 platYtDesc: "تحميل بجودة 1080p و 2K و 4K واستخراج صوت MP3 مباشرة وحفظ قوائم التشغيل كاملة بلمسة واحدة.",
@@ -490,15 +524,6 @@
                 platXDesc: "حفظ الفيديوهات المضمنة في التغريدات والثريدات ومقاطع الـ GIF العالية السرعة بمعدل البت الأصلي.",
                 platMoreDesc: "محرك تحميل متكامل يدعم بينترست، وريديت، وفيميو، وثريدز، وديلي موشن، وساوند كلاود، والمزيد.",
                 requestPlatform: "طلب إضافة موقع",
-                learnMore: "احصل عليه الآن &larr;",
-                blogTitle: "أحدث نصائح أندرويد والتحميل",
-                tagPrivacy: "نصائح أندرويد",
-                blog1Title: "كيفية تحميل مقاطع الفيديو بجودة 4K على أندرويد في ثوانٍ",
-                blog1Desc: "اكتشف دليلنا الشامل لحفظ الفيديوهات والريلز عالية الدقة من إنستغرام وتيك توك مباشرة إلى معرض هاتفك.",
-                readArticle: "اقرأ المقال &larr;",
-                tagUpdates: "التحديثات",
-                blog2Title: "إطلاق إصدار Omicron v7.14 لنظام أندرويد",
-                blog2Desc: "تعرف على المحرك متعدد الخيوط الجديد كليًا والتحميل في الخلفية ودعم المزيد من المواقع.",
                 supTitle: "هل تحتاج مساعدة مع Omicron لأندرويد؟",
                 supSearch: "ابحث عن الشروحات، المواقع المدعومة، الأسئلة الشائعة...",
                 kbTitle: "أدلة التحميل",
@@ -517,13 +542,14 @@
                 pFeat1: "معدلات تحويل عالية",
                 pFeat2: "هياكل عمولات سخية",
                 pFeat3: "دعم مخصص للشركاء",
-                pFeat4: "مواد تسويقية متوفرة"
+                pFeat4: "مواد تسويقية متوفرة",
+                dangerBanner: "⚠️ تحذير أمني: استخدام التطبيقات غير الموثوقة يعرض هاتفك لخطر الفيروسات، وبرمجيات التجسس، والبطء الشديد!"
             }
         };
 
         let currentLang = 'en';
         let isProtectionActive = true;
-        const validPages = ['home', 'platforms', 'blogs', 'support', 'partners'];
+        const validPages = ['home', 'platforms', 'support', 'partners'];
 
         function navigate(pageId) {
             if (!validPages.includes(pageId)) pageId = 'home';
@@ -552,6 +578,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             const hash = window.location.hash.replace('#', '');
             navigate(hash || 'home');
+            updateComparisonCard();
         });
 
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -593,7 +620,6 @@
                     if (el.tagName === 'INPUT') {
                         el.placeholder = translations[lang][key];
                     } else {
-                        // Check if element has an icon child to preserve it
                         const icon = el.querySelector('i');
                         if (icon) {
                             el.innerHTML = '';
@@ -609,39 +635,116 @@
             });
 
             if (currentLangText) currentLangText.innerText = translations[lang].langBtn;
-            updateStatusText();
+            updateComparisonCard();
         }
 
         function toggleProtection() {
             isProtectionActive = !isProtectionActive;
-            const track = document.getElementById('toggleTrack');
-            const circle = document.getElementById('toggleCircle');
-            const statusIcon = document.getElementById('statusIcon');
-            const statusContainer = document.getElementById('statusContainer');
-            const statusText = document.getElementById('statusText');
-
-            if (isProtectionActive) {
-                track.className = 'w-12 h-6 bg-adguard rounded-full relative cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none';
-                circle.className = 'w-4 h-4 bg-white rounded-full absolute left-1 top-1 shadow-sm transition-transform duration-300 ease-in-out translate-x-6';
-                statusIcon.className = 'fa-solid fa-bolt text-adguard text-2xl transition-colors duration-300';
-                statusContainer.className = 'mt-8 bg-gray-50 dark:bg-gray-900 p-4 rounded-xl flex items-center justify-center gap-3 transition-colors duration-300';
-                statusText.className = 'font-semibold text-gray-700 dark:text-gray-300 transition-colors duration-300';
-            } else {
-                track.className = 'w-12 h-6 bg-gray-300 dark:bg-gray-600 rounded-full relative cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none';
-                circle.className = 'w-4 h-4 bg-white rounded-full absolute left-1 top-1 shadow-sm transition-transform duration-300 ease-in-out translate-x-0';
-                statusIcon.className = 'fa-solid fa-pause text-yellow-500 text-2xl transition-colors duration-300';
-                statusContainer.className = 'mt-8 bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-xl flex items-center justify-center gap-3 transition-colors duration-300';
-                statusText.className = 'font-semibold text-yellow-700 dark:text-yellow-400 transition-colors duration-300';
-            }
-            updateStatusText();
+            updateComparisonCard();
         }
 
-        function updateStatusText() {
+        function updateComparisonCard() {
+            const track = document.getElementById('toggleTrack');
+            const circle = document.getElementById('toggleCircle');
+            const cardBox = document.getElementById('comparisonCardBox');
+            const brandIcon = document.getElementById('cardBrandIcon');
+            const brandTitle = document.getElementById('cardBrandTitle');
+            const stat1Label = document.getElementById('stat1Label');
+            const stat1Val = document.getElementById('stat1Val');
+            const stat2Label = document.getElementById('stat2Label');
+            const stat2Val = document.getElementById('stat2Val');
+            const stat3Label = document.getElementById('stat3Label');
+            const stat3Val = document.getElementById('stat3Val');
+            const statusContainer = document.getElementById('statusContainer');
+            const statusIcon = document.getElementById('statusIcon');
             const statusText = document.getElementById('statusText');
-            if (statusText) {
-                statusText.innerText = isProtectionActive 
-                    ? translations[currentLang].statusActive 
-                    : translations[currentLang].statusDisabled;
+            const dangerOverlay = document.getElementById('dangerOverlay');
+            const dangerBanner = document.getElementById('dangerBanner');
+            const dangerBannerText = document.getElementById('dangerBannerText');
+
+            const t = translations[currentLang] || translations.en;
+
+            if (stat1Label) stat1Label.innerText = t.stat1Label;
+            if (stat2Label) stat2Label.innerText = t.stat2Label;
+            if (stat3Label) stat3Label.innerText = t.stat3Label;
+            if (dangerBannerText) dangerBannerText.innerText = t.dangerBanner;
+
+            if (isProtectionActive) {
+                // Enabled: Safe Omicron state
+                document.body.classList.remove('danger-mode');
+                if (dangerOverlay) {
+                    dangerOverlay.classList.remove('opacity-100');
+                    dangerOverlay.classList.add('opacity-0');
+                }
+                if (dangerBanner) dangerBanner.classList.add('hidden');
+
+                if (track) track.className = 'w-12 h-6 bg-adguard rounded-full relative cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none';
+                if (circle) circle.className = 'w-4 h-4 bg-white rounded-full absolute left-1 top-1 shadow-sm transition-transform duration-300 ease-in-out translate-x-6';
+                if (cardBox) cardBox.className = 'relative bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-2xl rounded-2xl p-6 md:p-8 w-full max-w-md z-10 transform rotate-1 hover:rotate-0 transition-all duration-500';
+
+                if (brandIcon) brandIcon.className = 'fa-solid fa-shield-halved text-adguard text-xl transition-colors';
+                if (brandTitle) {
+                    brandTitle.innerText = t.cardTitleActive;
+                    brandTitle.className = 'font-bold text-xl text-gray-900 dark:text-white transition-colors';
+                }
+
+                if (stat1Val) {
+                    stat1Val.innerText = t.stat1Active;
+                    stat1Val.className = 'font-bold text-adguard transition-colors';
+                }
+                if (stat2Val) {
+                    stat2Val.innerText = t.stat2Active;
+                    stat2Val.className = 'font-bold text-adguard transition-colors';
+                }
+                if (stat3Val) {
+                    stat3Val.innerText = t.stat3Active;
+                    stat3Val.className = 'font-bold text-adguard transition-colors';
+                }
+
+                if (statusContainer) statusContainer.className = 'mt-8 bg-blue-50 dark:bg-gray-900 p-4 rounded-xl flex items-center justify-center gap-3 transition-colors duration-300 border border-blue-100 dark:border-gray-700';
+                if (statusIcon) statusIcon.className = 'fa-solid fa-bolt text-adguard text-2xl transition-colors duration-300';
+                if (statusText) {
+                    statusText.innerText = t.statusActive;
+                    statusText.className = 'font-semibold text-gray-700 dark:text-gray-300 transition-colors duration-300';
+                }
+            } else {
+                // Disabled: Insecure "Other Apps" state
+                document.body.classList.add('danger-mode');
+                if (dangerOverlay) {
+                    dangerOverlay.classList.remove('opacity-0');
+                    dangerOverlay.classList.add('opacity-100');
+                }
+                if (dangerBanner) dangerBanner.classList.remove('hidden');
+
+                if (track) track.className = 'w-12 h-6 bg-red-500 rounded-full relative cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none';
+                if (circle) circle.className = 'w-4 h-4 bg-white rounded-full absolute left-1 top-1 shadow-sm transition-transform duration-300 ease-in-out translate-x-0';
+                if (cardBox) cardBox.className = 'relative bg-white dark:bg-gray-800 border-2 border-red-500 dark:border-red-500 shadow-[0_0_35px_rgba(239,68,68,0.35)] rounded-2xl p-6 md:p-8 w-full max-w-md z-10 transform -rotate-1 hover:rotate-0 transition-all duration-500';
+
+                if (brandIcon) brandIcon.className = 'fa-solid fa-triangle-exclamation text-red-500 text-xl transition-colors';
+                if (brandTitle) {
+                    brandTitle.innerText = t.cardTitleInactive;
+                    brandTitle.className = 'font-bold text-xl text-red-600 dark:text-red-400 transition-colors';
+                }
+
+                if (stat1Val) {
+                    stat1Val.innerText = t.stat1Inactive;
+                    stat1Val.className = 'font-bold text-red-600 dark:text-red-400 transition-colors';
+                }
+                if (stat2Val) {
+                    stat2Val.innerText = t.stat2Inactive;
+                    stat2Val.className = 'font-bold text-red-600 dark:text-red-400 transition-colors';
+                }
+                if (stat3Val) {
+                    stat3Val.innerText = t.stat3Inactive;
+                    stat3Val.className = 'font-bold text-red-600 dark:text-red-400 transition-colors';
+                }
+
+                if (statusContainer) statusContainer.className = 'mt-8 bg-red-50 dark:bg-red-950/40 p-4 rounded-xl flex items-center justify-center gap-3 transition-colors duration-300 border border-red-200 dark:border-red-800';
+                if (statusIcon) statusIcon.className = 'fa-solid fa-skull-crossbones text-red-500 text-2xl transition-colors duration-300 animate-pulse';
+                if (statusText) {
+                    statusText.innerText = t.statusDisabled;
+                    statusText.className = 'font-semibold text-red-700 dark:text-red-300 transition-colors duration-300';
+                }
             }
         }
     </script>
