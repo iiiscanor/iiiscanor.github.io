@@ -107,9 +107,10 @@
                 </ul>
 
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <button class="bg-adguard hover:bg-adguardDark text-white text-lg font-bold py-4 px-8 rounded-full transition-all transform hover:-translate-y-1 animate-fire-glow" data-i18n="btnDownload">
+                    <!-- زر التحميل الموجه إلى قناة واتساب مباشرة 📲 -->
+                    <a href="https://whatsapp.com/channel/0029Vb7MArw0LKZMpjjqOk2P" target="_blank" rel="noopener noreferrer" class="bg-adguard hover:bg-adguardDark text-white text-lg font-bold py-4 px-8 rounded-full transition-all transform hover:-translate-y-1 animate-fire-glow inline-flex items-center justify-center gap-2 text-center" data-i18n="btnDownload">
                         Download
-                    </button>
+                    </a>
                     <button class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border-2 border-gray-200 dark:border-gray-700 text-lg font-bold py-4 px-8 rounded-full transition-all" data-i18n="btnInstall">
                         How to install
                     </button>
@@ -269,7 +270,6 @@
 
     <!-- Logic: Routing, Translation, Theme & Interactivity ⚙️ -->
     <script>
-        // قاموس الترجمة الشامل لجميع الأقسام
         const translations = {
             en: {
                 navClone: "Clone",
@@ -460,20 +460,16 @@
         let isProtectionActive = true;
         const validPages = ['home', 'products', 'blogs', 'support', 'partners'];
 
-        // نظام التوجيه (SPA Router)
         function navigate(pageId) {
             if (!validPages.includes(pageId)) pageId = 'home';
             
-            // إخفاء كل الصفحات
             document.querySelectorAll('.page-view').forEach(view => {
                 view.classList.add('hidden');
             });
 
-            // إظهار الصفحة المستهدفة
             const activeView = document.getElementById(`view-${pageId}`);
             if (activeView) activeView.classList.remove('hidden');
 
-            // تحديث حالة أزرار النافبار
             document.querySelectorAll('.nav-link').forEach(btn => {
                 btn.classList.remove('text-adguard');
                 btn.classList.add('hover:text-adguard');
@@ -484,18 +480,15 @@
                 activeNavBtn.classList.remove('hover:text-adguard');
             }
 
-            // تحديث رابط الهاش بالمتصفح
             window.location.hash = pageId;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // قراءة الهاش عند فتح الرابط
         window.addEventListener('DOMContentLoaded', () => {
             const hash = window.location.hash.replace('#', '');
             navigate(hash || 'home');
         });
 
-        // Theme initialization
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -512,7 +505,6 @@
             }
         }
 
-        // Multi-language switch
         function setLanguage(lang) {
             currentLang = lang;
             const htmlTag = document.getElementById('htmlTag');
@@ -542,7 +534,6 @@
             updateStatusText();
         }
 
-        // Protection Toggle Interactivity
         function toggleProtection() {
             isProtectionActive = !isProtectionActive;
             const track = document.getElementById('toggleTrack');
