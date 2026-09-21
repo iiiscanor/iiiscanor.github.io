@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlTag">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omicron - All-in-One Platform</title>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        adguard: '#67b246',
+                        adguardDark: '#509033',
+                    },
+                    animation: {
+                        'fire-glow': 'fireGlow 1.5s infinite alternate',
+                    },
+                    keyframes: {
+                        fireGlow: {
+                            '0%': { boxShadow: '0 0 5px 0px rgba(103, 178, 70, 0.4)' },
+                            '100%': { boxShadow: '0 0 25px 10px rgba(103, 178, 70, 0.8)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans antialiased transition-colors duration-300 min-h-screen flex flex-col justify-between">
+
+    <!-- Unified Navigation Bar 🧭 -->
+    <nav class="flex items-center justify-between px-8 py-4 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300 sticky top-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50">
+        <div class="flex items-center gap-2">
+            <a href="#home" onclick="navigate('home')" class="flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-adguard text-3xl"></i>
+                <span class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Omicron <span class="text-xs text-gray-400 font-normal" data-i18n="navClone">Clone</span></span>
+            </a>
+        </div>
+        <div class="hidden md:flex gap-6 text-sm font-semibold text-gray-600 dark:text-gray-400">
+            <button onclick="navigate('home')" id="nav-btn-home" class="nav-link text-adguard transition-colors" data-i18n="navHome">Home</button>
+            <button onclick="navigate('products')" id="nav-btn-products" class="nav-link hover:text-adguard transition-colors" data-i18n="navProducts">Products</button>
+            <button onclick="navigate('blogs')" id="nav-btn-blogs" class="nav-link hover:text-adguard transition-colors" data-i18n="navBlog">Blog</button>
+            <button onclick="navigate('support')" id="nav-btn-support" class="nav-link hover:text-adguard transition-colors" data-i18n="navSupport">Support</button>
+            <button onclick="navigate('partners')" id="nav-btn-partners" class="nav-link hover:text-adguard transition-colors" data-i18n="navPartners">Partners</button>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="#" class="text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-adguard" data-i18n="navLogin">Log in</a>
+            
+            <!-- Dark / Light Mode Toggle 🌙☀️ -->
+            <button onclick="toggleTheme()" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none rounded-full text-sm p-2.5 transition-colors">
+                <i class="fa-solid fa-moon hidden dark:block"></i>
+                <i class="fa-solid fa-sun dark:hidden block"></i>
+            </button>
+
+            <!-- Language Dropdown 🌍 -->
+            <div class="relative group z-50">
+                <button class="bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-semibold py-2 px-4 rounded-full transition-colors flex items-center gap-2">
+                    <span id="currentLangText">EN </span> <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+                </button>
+                <div class="absolute right-0 mt-1 w-32 bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-100 dark:border-gray-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                    <a href="javascript:void(0)" onclick="setLanguage('en')" class="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 hover:text-adguard dark:hover:text-adguard rounded-t-xl transition-colors">English (EN)</a>
+                    <a href="javascript:void(0)" onclick="setLanguage('fr')" class="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 hover:text-adguard dark:hover:text-adguard transition-colors">Français (FR)</a>
+                    <a href="javascript:void(0)" onclick="setLanguage('ar')" class="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-800 hover:text-adguard dark:hover:text-adguard rounded-b-xl transition-colors">العربية (AR)</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Content Pages / Sections 📱 -->
+    <div id="pages-container" class="flex-1">
+
+        <!-- 1. HOME VIEW (AAA.html) 🏠 -->
+        <section id="view-home" class="page-view max-w-7xl mx-auto px-8 py-16 md:py-24 flex flex-col md:flex-row items-center gap-12">
+            <div class="flex-1 space-y-8">
+                <div class="inline-flex items-center gap-2 bg-green-50 dark:bg-gray-800/50 text-adguard px-3 py-1 rounded-full text-sm font-semibold border border-green-100 dark:border-gray-700">
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                    <span data-i18n="reviews">20,160 user reviews - Excellent!</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl font-extrabold leading-tight text-gray-900 dark:text-white">
+                    <span data-i18n="heading1">Surf the Web ad-free and safely. </span><br/>
+                    <span class="text-adguard" data-i18n="heading2">Shields up!</span>
+                </h1>
+                
+                <ul class="space-y-4 text-lg text-gray-600 dark:text-gray-400">
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-adguard"></i>
+                        <span data-i18n="feat1">Blocks all kinds of ads</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-adguard"></i>
+                        <span data-i18n="feat2">Removes annoying web elements</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-adguard"></i>
+                        <span data-i18n="feat3">Saves traffic and speeds up page loading</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-adguard"></i>
+                        <span data-i18n="feat4">Works for browsers and apps</span>
+                    </li>
+                </ul>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button class="bg-adguard hover:bg-adguardDark text-white text-lg font-bold py-4 px-8 rounded-full transition-all transform hover:-translate-y-1 animate-fire-glow" data-i18n="btnDownload">
+                        Download
+                    </button>
+                    <button class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border-2 border-gray-200 dark:border-gray-700 text-lg font-bold py-4 px-8 rounded-full transition-all" data-i18n="btnInstall">
+                        How to install
+                    </button>
+                </div>
+                <p class="text-xs text-gray-400 mt-2" data-i18n="disclaimer">By downloading the program you accept the terms of the License agreement</p>
+            </div>
+
+            <div class="flex-1 flex justify-center relative w-full">
+                <div class="absolute inset-0 bg-green-100 dark:bg-adguard/20 rounded-full blur-3xl opacity-50 transform -translate-x-10 translate-y-10 transition-colors duration-500"></div>
+                <div class="relative bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-2xl rounded-2xl p-8 w-full max-w-md z-10 transform rotate-2 hover:rotate-0 transition-all duration-500">
+                    <div class="flex justify-between items-center mb-6 border-b dark:border-gray-700 pb-4">
+                        <h3 class="font-bold text-xl dark:text-white" data-i18n="cardTitle">Omicron Protection</h3>
+                        <button dir="ltr" onclick="toggleProtection()" id="toggleTrack" class="w-12 h-6 bg-adguard rounded-full relative cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none">
+                            <div id="toggleCircle" class="w-4 h-4 bg-white rounded-full absolute left-1 top-1 shadow-sm transition-transform duration-300 ease-in-out translate-x-6"></div>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600 dark:text-gray-400" data-i18n="stat1">Ads blocked today</span>
+                            <span class="font-bold text-adguard">1,204</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600 dark:text-gray-400" data-i18n="stat2">Trackers blocked</span>
+                            <span class="font-bold text-adguard">342</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600 dark:text-gray-400" data-i18n="stat3">Data saved</span>
+                            <span class="font-bold text-adguard">14.5 MB</span>
+                        </div>
+                    </div>
+                    <div id="statusContainer" class="mt-8 bg-gray-50 dark:bg-gray-900 p-4 rounded-xl flex items-center justify-center gap-3 transition-colors duration-300">
+                        <i id="statusIcon" class="fa-solid fa-shield-check text-adguard text-2xl transition-colors duration-300"></i>
+                        <span id="statusText" class="font-semibold text-gray-700 dark:text-gray-300 transition-colors duration-300" data-i18n="statusActive">Protection is Active</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PRODUCTS VIEW (products.html) 📦 -->
+        <section id="view-products" class="page-view hidden max-w-7xl mx-auto px-8 py-16">
+            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-8" data-i18n="prodTitle">Our Products</h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <i class="fa-brands fa-windows text-4xl text-blue-500 mb-4"></i>
+                    <h2 class="text-2xl font-bold mb-2 dark:text-white" data-i18n="prodWin">Omicron for Windows</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-i18n="prodWinDesc">The ultimate ad blocker for Windows that blocks all types of ads and protects your privacy.</p>
+                    <button class="text-adguard font-semibold hover:underline" data-i18n="learnMore">Learn more &rarr;</button>
+                </div>
+                <div class="p-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <i class="fa-brands fa-apple text-4xl text-gray-800 dark:text-gray-300 mb-4"></i>
+                    <h2 class="text-2xl font-bold mb-2 dark:text-white" data-i18n="prodMac">Omicron for Mac</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-i18n="prodMacDesc">Block ads, protect your personal data, and control your children's internet access.</p>
+                    <button class="text-adguard font-semibold hover:underline" data-i18n="learnMore">Learn more &rarr;</button>
+                </div>
+                <div class="p-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <i class="fa-brands fa-android text-4xl text-green-500 mb-4"></i>
+                    <h2 class="text-2xl font-bold mb-2 dark:text-white" data-i18n="prodAnd">Omicron for Android</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-i18n="prodAndDesc">A unique no-root ad blocker for Android that removes ads in apps and browsers.</p>
+                    <button class="text-adguard font-semibold hover:underline" data-i18n="learnMore">Learn more &rarr;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. BLOGS VIEW (blogs.html) 📝 -->
+        <section id="view-blogs" class="page-view hidden max-w-7xl mx-auto px-8 py-16">
+            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-8" data-i18n="blogTitle">Latest from our Blog</h1>
+            <div class="space-y-8">
+                <article class="flex flex-col md:flex-row gap-8 items-center bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                    <div class="w-full md:w-1/3 h-48 bg-gray-200 dark:bg-gray-700 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-newspaper text-5xl text-gray-400 dark:text-gray-500"></i>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <span class="text-sm font-semibold text-adguard mb-2 block" data-i18n="tagPrivacy">Privacy</span>
+                        <h2 class="text-2xl font-bold mb-3 dark:text-white" data-i18n="blog1Title">How tracking cookies follow you around the web</h2>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-i18n="blog1Desc">Learn about the mechanics of tracking cookies and how Omicron protects your digital footprint from data brokers.</p>
+                        <a href="javascript:void(0)" class="text-adguard font-semibold hover:underline" data-i18n="readArticle">Read article &rarr;</a>
+                    </div>
+                </article>
+                <article class="flex flex-col md:flex-row gap-8 items-center bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                    <div class="w-full md:w-1/3 h-48 bg-gray-200 dark:bg-gray-700 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-rocket text-5xl text-gray-400 dark:text-gray-500"></i>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <span class="text-sm font-semibold text-adguard mb-2 block" data-i18n="tagUpdates">Updates</span>
+                        <h2 class="text-2xl font-bold mb-3 dark:text-white" data-i18n="blog2Title">Omicron v7.14 for Windows is here</h2>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-i18n="blog2Desc">Discover the new features, performance improvements, and bug fixes in the latest release of our flagship product.</p>
+                        <a href="javascript:void(0)" class="text-adguard font-semibold hover:underline" data-i18n="readArticle">Read article &rarr;</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 4. SUPPORT VIEW (support.html) 🎧 -->
+        <section id="view-support" class="page-view hidden max-w-7xl mx-auto px-8 py-16 text-center">
+            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-6" data-i18n="supTitle">How can we help you?</h1>
+            <div class="max-w-2xl mx-auto mb-12">
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" placeholder="Search for answers..." class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full py-4 pl-12 pr-4 text-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-adguard focus:ring-1 focus:ring-adguard transition-all" data-i18n="supSearch">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-lg transition-shadow cursor-pointer">
+                    <i class="fa-solid fa-book text-3xl text-adguard mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 dark:text-white" data-i18n="kbTitle">Knowledge Base</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm" data-i18n="kbDesc">Detailed guides and FAQs</p>
+                </div>
+                <div class="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-lg transition-shadow cursor-pointer">
+                    <i class="fa-solid fa-ticket text-3xl text-adguard mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 dark:text-white" data-i18n="tickTitle">Submit a Ticket</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm" data-i18n="tickDesc">Get help from our team</p>
+                </div>
+                <div class="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-lg transition-shadow cursor-pointer">
+                    <i class="fa-brands fa-discourse text-3xl text-adguard mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 dark:text-white" data-i18n="forTitle">Forum</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm" data-i18n="forDesc">Join the community</p>
+                </div>
+                <div class="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-lg transition-shadow cursor-pointer">
+                    <i class="fa-solid fa-key text-3xl text-adguard mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 dark:text-white" data-i18n="licTitle">License Recovery</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm" data-i18n="licDesc">Lost your key?</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PARTNERS VIEW (partners.html) 🤝 -->
+        <section id="view-partners" class="page-view hidden max-w-7xl mx-auto px-8 py-16">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="flex-1 space-y-6">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight" data-i18n="partTitle">Partner with Omicron</h1>
+                    <p class="text-lg text-gray-600 dark:text-gray-400" data-i18n="partDesc">Join our affiliate and partner programs. Earn money by promoting the world's most advanced ad blocker.</p>
+                    <div class="flex gap-4">
+                        <button class="bg-adguard hover:bg-adguardDark text-white font-bold py-3 px-6 rounded-full transition-colors" data-i18n="btnPartner">Become a partner</button>
+                        <button class="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 font-bold py-3 px-6 rounded-full transition-colors" data-i18n="btnLearn">Learn more</button>
+                    </div>
+                </div>
+                <div class="flex-1 w-full bg-green-50 dark:bg-gray-800/50 p-10 rounded-3xl border border-green-100 dark:border-gray-700 text-center">
+                    <i class="fa-solid fa-handshake text-6xl text-adguard mb-6"></i>
+                    <h2 class="text-2xl font-bold mb-4 dark:text-white" data-i18n="whyPartner">Why Partner with Us?</h2>
+                    <ul class="text-left space-y-3 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-adguard"></i> <span data-i18n="pFeat1">High conversion rates</span></li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-adguard"></i> <span data-i18n="pFeat2">Generous commission structures</span></li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-adguard"></i> <span data-i18n="pFeat3">Dedicated partner support</span></li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-adguard"></i> <span data-i18n="pFeat4">Marketing materials provided</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Unified Footer ⚡ -->
+    <footer class="border-t border-gray-100 dark:border-gray-800 py-6 text-center text-xs text-gray-400">
+        &copy; 2026 Omicron Protection Systems. All rights reserved.
+    </footer>
+
+    <!-- Logic: Routing, Translation, Theme & Interactivity ⚙️ -->
+    <script>
+        // قاموس الترجمة الشامل لجميع الأقسام
+        const translations = {
+            en: {
+                navClone: "Clone",
+                navHome: "Home",
+                navProducts: "Products",
+                navBlog: "Blog",
+                navSupport: "Support",
+                navPartners: "Partners",
+                navLogin: "Log in",
+                langBtn: "EN ",
+                reviews: "20,160 user reviews - Excellent!",
+                heading1: "Surf the Web ad-free and safely.",
+                heading2: "Shields up!",
+                feat1: "Blocks all kinds of ads",
+                feat2: "Removes annoying web elements",
+                feat3: "Saves traffic and speeds up page loading",
+                feat4: "Works for browsers and apps",
+                btnDownload: "Download",
+                btnInstall: "How to install",
+                disclaimer: "By downloading the program you accept the terms of the License agreement",
+                cardTitle: "Omicron Protection",
+                stat1: "Ads blocked today",
+                stat2: "Trackers blocked",
+                stat3: "Data saved",
+                statusActive: "Protection is Active",
+                statusDisabled: "Protection is Disabled",
+                prodTitle: "Our Products",
+                prodWin: "Omicron for Windows",
+                prodWinDesc: "The ultimate ad blocker for Windows that blocks all types of ads and protects your privacy.",
+                prodMac: "Omicron for Mac",
+                prodMacDesc: "Block ads, protect your personal data, and control your children's internet access.",
+                prodAnd: "Omicron for Android",
+                prodAndDesc: "A unique no-root ad blocker for Android that removes ads in apps and browsers.",
+                learnMore: "Learn more &rarr;",
+                blogTitle: "Latest from our Blog",
+                tagPrivacy: "Privacy",
+                blog1Title: "How tracking cookies follow you around the web",
+                blog1Desc: "Learn about the mechanics of tracking cookies and how Omicron protects your digital footprint from data brokers.",
+                readArticle: "Read article &rarr;",
+                tagUpdates: "Updates",
+                blog2Title: "Omicron v7.14 for Windows is here",
+                blog2Desc: "Discover the new features, performance improvements, and bug fixes in the latest release of our flagship product.",
+                supTitle: "How can we help you?",
+                supSearch: "Search for answers...",
+                kbTitle: "Knowledge Base",
+                kbDesc: "Detailed guides and FAQs",
+                tickTitle: "Submit a Ticket",
+                tickDesc: "Get help from our team",
+                forTitle: "Forum",
+                forDesc: "Join the community",
+                licTitle: "License Recovery",
+                licDesc: "Lost your key?",
+                partTitle: "Partner with Omicron",
+                partDesc: "Join our affiliate and partner programs. Earn money by promoting the world's most advanced ad blocker.",
+                btnPartner: "Become a partner",
+                btnLearn: "Learn more",
+                whyPartner: "Why Partner with Us?",
+                pFeat1: "High conversion rates",
+                pFeat2: "Generous commission structures",
+                pFeat3: "Dedicated partner support",
+                pFeat4: "Marketing materials provided"
+            },
+            fr: {
+                navClone: "Clone",
+                navHome: "Accueil",
+                navProducts: "Produits",
+                navBlog: "Blog",
+                navSupport: "Support",
+                navPartners: "Partenaires",
+                navLogin: "Connexion",
+                langBtn: "FR ",
+                reviews: "20 160 avis d'utilisateurs - Excellent !",
+                heading1: "Surfez sans pub et en sécurité.",
+                heading2: "Boucliers activés !",
+                feat1: "Bloque toutes sortes de publicités",
+                feat2: "Supprime les éléments Web ennuyeux",
+                feat3: "Économise le trafic et accélère le chargement",
+                feat4: "Fonctionne pour navigateurs et applications",
+                btnDownload: "Télécharger",
+                btnInstall: "Comment installer",
+                disclaimer: "En téléchargeant le programme, vous acceptez les termes du contrat",
+                cardTitle: "Protection Omicron",
+                stat1: "Pubs bloquées",
+                stat2: "Traqueurs bloqués",
+                stat3: "Données économisées",
+                statusActive: "La protection est active",
+                statusDisabled: "La protection est désactivée",
+                prodTitle: "Nos Produits",
+                prodWin: "Omicron pour Windows",
+                prodWinDesc: "Le bloqueur de publicités ultime pour Windows qui bloque tous les types de publicités et protège votre vie privée.",
+                prodMac: "Omicron pour Mac",
+                prodMacDesc: "Bloquez les publicités, protégez vos données personnelles et contrôlez l'accès Internet de vos enfants.",
+                prodAnd: "Omicron pour Android",
+                prodAndDesc: "Un bloqueur de publicités sans root unique pour Android qui supprime les publicités dans les applications et les navigateurs.",
+                learnMore: "En savoir plus &rarr;",
+                blogTitle: "Les dernières nouveautés de notre blog",
+                tagPrivacy: "Confidentialité",
+                blog1Title: "Comment les cookies de suivi vous pistent sur le web",
+                blog1Desc: "Découvrez les mécanismes des cookies de suivi et comment Omicron protège votre empreinte numérique des courtiers en données.",
+                readArticle: "Lire l'article &rarr;",
+                tagUpdates: "Mises à jour",
+                blog2Title: "Omicron v7.14 pour Windows est là",
+                blog2Desc: "Découvrez les nouvelles fonctionnalités, les améliorations de performances et les corrections de bugs de la dernière version de notre produit phare.",
+                supTitle: "Comment pouvons-nous vous aider ?",
+                supSearch: "Rechercher des réponses...",
+                kbTitle: "Base de connaissances",
+                kbDesc: "Guides détaillés et FAQ",
+                tickTitle: "Soumettre un ticket",
+                tickDesc: "Obtenez l'aide de notre équipe",
+                forTitle: "Forum",
+                forDesc: "Rejoignez la communauté",
+                licTitle: "Récupération de licence",
+                licDesc: "Vous avez perdu votre clé ?",
+                partTitle: "Devenez partenaire d'Omicron",
+                partDesc: "Rejoignez nos programmes d'affiliation et de partenariat. Gagnez de l'argent en promouvant le bloqueur de publicités le plus avancé au monde.",
+                btnPartner: "Devenir partenaire",
+                btnLearn: "En savoir plus",
+                whyPartner: "Pourquoi devenir partenaire ?",
+                pFeat1: "Taux de conversion élevés",
+                pFeat2: "Structures de commissions généreuses",
+                pFeat3: "Support partenaire dédié",
+                pFeat4: "Matériel de marketing fourni"
+            },
+            ar: {
+                navClone: "نسخة",
+                navHome: "الرئيسية",
+                navProducts: "المنتجات",
+                navBlog: "المدونة",
+                navSupport: "الدعم",
+                navPartners: "الشركاء",
+                navLogin: "تسجيل الدخول",
+                langBtn: "AR ",
+                reviews: "20,160 تقييم مستخدم - ممتاز!",
+                heading1: "تصفح الويب بدون إعلانات وبأمان.",
+                heading2: "دروعنا جاهزة!",
+                feat1: "يحظر جميع أنواع الإعلانات",
+                feat2: "يزيل عناصر الويب المزعجة",
+                feat3: "يوفر استهلاك البيانات ويسرع التحميل",
+                feat4: "يعمل مع المتصفحات والتطبيقات",
+                btnDownload: "تحميل",
+                btnInstall: "كيفية التثبيت",
+                disclaimer: "بتنزيل البرنامج فإنك تقبل شروط اتفاقية الترخيص",
+                cardTitle: "حماية Omicron",
+                stat1: "إعلانات تم حظرها",
+                stat2: "متتبعات تم حظرها",
+                stat3: "بيانات تم توفيرها",
+                statusActive: "الحماية نشطة",
+                statusDisabled: "الحماية معطلة",
+                prodTitle: "منتجاتنا",
+                prodWin: "Omicron لنظام Windows",
+                prodWinDesc: "أداة حظر الإعلانات المثالية لنظام Windows والتي تحظر جميع أنواع الإعلانات وتحمي خصوصيتك.",
+                prodMac: "Omicron لنظام Mac",
+                prodMacDesc: "احظر الإعلانات، واحم بياناتك الشخصية، وتحكم في وصول أطفالك إلى الإنترنت.",
+                prodAnd: "Omicron لنظام Android",
+                prodAndDesc: "أداة فريدة لحظر الإعلانات بدون روت لنظام Android تزيل الإعلانات في التطبيقات والمتصفحات.",
+                learnMore: "اعرف المزيد &larr;",
+                blogTitle: "أحدث المقالات من مدونتنا",
+                tagPrivacy: "الخصوصية",
+                blog1Title: "كيف تتبعك ملفات تعريف الارتباط التتبعية عبر الويب",
+                blog1Desc: "تعرف على آليات عمل ملفات تعريف الارتباط التتبعية وكيف يحمي Omicron بصمتك الرقمية من وسطاء البيانات.",
+                readArticle: "اقرأ المقال &larr;",
+                tagUpdates: "التحديثات",
+                blog2Title: "إصدار Omicron v7.14 لنظام Windows متاح الآن",
+                blog2Desc: "اكتشف الميزات الجديدة والتحسينات في الأداء وإصلاحات الأخطاء في أحدث إصدار من منتجنا الرئيسي.",
+                supTitle: "كيف يمكننا مساعدتك؟",
+                supSearch: "ابحث عن إجابات...",
+                kbTitle: "قاعدة المعرفة",
+                kbDesc: "أدلة مفصلة وأسئلة شائعة",
+                tickTitle: "تقديم تذكرة",
+                tickDesc: "احصل على المساعدة من فريقنا",
+                forTitle: "المنتدى",
+                forDesc: "انضم إلى المجتمع",
+                licTitle: "استعادة الترخيص",
+                licDesc: "فقدت مفتاحك؟",
+                partTitle: "كن شريكًا لـ Omicron",
+                partDesc: "انضم إلى برامج الشركات التابعة والشركاء. اكسب المال عن طريق الترويج لمانع الإعلانات الأكثر تقدمًا في العالم.",
+                btnPartner: "أصبح شريكًا",
+                btnLearn: "اعرف المزيد",
+                whyPartner: "لماذا تشارك معنا؟",
+                pFeat1: "معدلات تحويل عالية",
+                pFeat2: "هياكل عمولات سخية",
+                pFeat3: "دعم مخصص للشركاء",
+                pFeat4: "مواد تسويقية متوفرة"
+            }
+        };
+
+        let currentLang = 'en';
+        let isProtectionActive = true;
+        const validPages = ['home', 'products', 'blogs', 'support', 'partners'];
+
+        // نظام التوجيه (SPA Router)
+        function navigate(pageId) {
+            if (!validPages.includes(pageId)) pageId = 'home';
+            
+            // إخفاء كل الصفحات
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.add('hidden');
+            });
+
+            // إظهار الصفحة المستهدفة
+            const activeView = document.getElementById(`view-${pageId}`);
+            if (activeView) activeView.classList.remove('hidden');
+
+            // تحديث حالة أزرار النافبار
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                btn.classList.remove('text-adguard');
+                btn.classList.add('hover:text-adguard');
+            });
+            const activeNavBtn = document.getElementById(`nav-btn-${pageId}`);
+            if (activeNavBtn) {
+                activeNavBtn.classList.add('text-adguard');
+                activeNavBtn.classList.remove('hover:text-adguard');
+            }
+
+            // تحديث رابط الهاش بالمتصفح
+            window.location.hash = pageId;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // قراءة الهاش عند فتح الرابط
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            navigate(hash || 'home');
+        });
+
+        // Theme initialization
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+
+        // Multi-language switch
+        function setLanguage(lang) {
+            currentLang = lang;
+            const htmlTag = document.getElementById('htmlTag');
+            const dropdownMenu = document.querySelector('.group > div');
+            const i18nList = document.querySelectorAll('[data-i18n]');
+            const currentLangText = document.getElementById('currentLangText');
+
+            if (lang === 'ar') {
+                htmlTag.dir = 'rtl';
+                htmlTag.lang = 'ar';
+                if (dropdownMenu) dropdownMenu.classList.replace('right-0', 'left-0');
+            } else {
+                htmlTag.dir = 'ltr';
+                htmlTag.lang = lang;
+                if (dropdownMenu) dropdownMenu.classList.replace('left-0', 'right-0');
+            }
+
+            i18nList.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    if (el.tagName === 'INPUT') el.placeholder = translations[lang][key];
+                    else el.innerHTML = translations[lang][key];
+                }
+            });
+
+            if (currentLangText) currentLangText.innerText = translations[lang].langBtn;
+            updateStatusText();
+        }
+
+        // Protection Toggle Interactivity
+        function toggleProtection() {
+            isProtectionActive = !isProtectionActive;
+            const track = document.getElementById('toggleTrack');
+            const circle = document.getElementById('toggleCircle');
+            const statusIcon = document.getElementById('statusIcon');
+            const statusContainer = document.getElementById('statusContainer');
+            const statusText = document.getElementById('statusText');
+
+            if (isProtectionActive) {
+                track.className = 'w-12 h-6 bg-adguard rounded-full relative cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none';
+                circle.className = 'w-4 h-4 bg-white rounded-full absolute left-1 top-1 shadow-sm transition-transform duration-300 ease-in-out translate-x-6';
+                statusIcon.className = 'fa-solid fa-shield-check text-adguard text-2xl transition-colors duration-300';
+                statusContainer.className = 'mt-8 bg-gray-50 dark:bg-gray-900 p-4 rounded-xl flex items-center justify-center gap-3 transition-colors duration-300';
+                statusText.className = 'font-semibold text-gray-700 dark:text-gray-300 transition-colors duration-300';
+            } else {
+                track.className = 'w-12 h-6 bg-gray-300 dark:bg-gray-600 rounded-full relative cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none';
+                circle.className = 'w-4 h-4 bg-white rounded-full absolute left-1 top-1 shadow-sm transition-transform duration-300 ease-in-out translate-x-0';
+                statusIcon.className = 'fa-solid fa-shield-xmark text-red-500 text-2xl transition-colors duration-300';
+                statusContainer.className = 'mt-8 bg-red-50 dark:bg-red-900/30 p-4 rounded-xl flex items-center justify-center gap-3 transition-colors duration-300';
+                statusText.className = 'font-semibold text-red-700 dark:text-red-400 transition-colors duration-300';
+            }
+            updateStatusText();
+        }
+
+        function updateStatusText() {
+            const statusText = document.getElementById('statusText');
+            if (statusText) {
+                statusText.innerText = isProtectionActive 
+                    ? translations[currentLang].statusActive 
+                    : translations[currentLang].statusDisabled;
+            }
+        }
+    </script>
+</body>
+</html>
