@@ -1,0 +1,14 @@
+
+<svg xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <svg id="facebook" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="Facebook">
+        <g id="Group 3">
+          <path id="Fill 1" fill-rule="evenodd" clip-rule="evenodd" d="M20.896 22C21.5056 22 21.9998 21.5057 21.9998 20.8962V3.10388C21.9998 2.49413 21.5056 2 20.896 2H3.1038C2.49405 2 2 2.49413 2 3.10388V20.8962C2 21.5057 2.49405 22 3.1038 22H20.896Z" fill="#202124"/>
+          <path id="Fill 4" fill-rule="evenodd" clip-rule="evenodd" d="M15.7943 21.9999V14.258H18.393L18.7821 11.2408H15.7943V9.31438C15.7943 8.44083 16.0368 7.84547 17.2896 7.84547L18.8873 7.8448V5.14622C18.6109 5.10952 17.6625 5.02734 16.5592 5.02734C14.2556 5.02734 12.6786 6.43341 12.6786 9.01566V11.2408H10.0732V14.258H12.6786V21.9999H15.7943Z" fill="white"/>
+        </g>
+      </g>
+    </svg>
+  </defs>
+</svg>
+
