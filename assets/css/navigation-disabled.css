@@ -1,0 +1,5 @@
+a[data-navigation-disabled="true"],
+area[data-navigation-disabled="true"],
+button[data-navigation-disabled="true"] {
+  cursor: default !important;
+}
