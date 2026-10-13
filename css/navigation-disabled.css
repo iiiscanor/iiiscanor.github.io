@@ -1,0 +1,11 @@
+/* Keep navigation text on the site's Google font stack. */
+.main-menu__label,
+.main-menu__label-tablet {
+  font-family: "Google Sans Flex", Arial, Helvetica, sans-serif;
+}
+
+a[data-navigation-disabled="true"],
+area[data-navigation-disabled="true"],
+button[data-navigation-disabled="true"] {
+  cursor: default !important;
+}
